@@ -2,11 +2,10 @@ package com.example.spring_solo_project.controller;
 
 import com.example.spring_solo_project.model.Composer;
 import com.example.spring_solo_project.repository.ComposerRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,4 +28,21 @@ public class ComposerController {
         composerRepository.deleteById(id);
     }
 
+    @PutMapping("/composers/{id}")
+    @Transactional
+    public void updateComposer(@PathVariable Long id,
+                               @RequestParam(required = false) String firstName,
+                               @RequestParam(required = false) String lastName,
+                               @RequestParam(required = false) Date dob){
+        Composer composer = composerRepository.findById(id).orElseThrow();
+        if(firstName != null){
+            composer.setFirstName(firstName);
+        }
+        if(lastName != null){
+            composer.setLastName(lastName);
+        }
+        if(dob != null){
+            composer.setDob(dob);
+        }
+    }
 }
