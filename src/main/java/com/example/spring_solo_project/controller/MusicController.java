@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/music")
 public class MusicController {
 
     private final MusicRepository musicRepository;
@@ -15,7 +16,7 @@ public class MusicController {
         this.musicRepository = musicRepository;
     }
 
-    @GetMapping("/music")
+    @GetMapping
     public List<Music> getMusic( @RequestParam(required = false, name = "year") Integer year){
 
         //  /music?year=2000
@@ -26,17 +27,17 @@ public class MusicController {
         return musicRepository.findAll();
     }
 
-    @GetMapping("/music/{title}")
+    @GetMapping("/{title}")
     public Music findMusicByTitle(@PathVariable String title){
         return musicRepository.findByTitle(title);
     }
 
-    @PostMapping("/music")
+    @PostMapping
     public void createMusic(@RequestBody Music music){
         musicRepository.save(music);
     }
 
-    @DeleteMapping("/music/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteMusicById(@PathVariable Long id){
         musicRepository.deleteById(id);
     }

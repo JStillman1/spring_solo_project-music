@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping("/composers")
 public class ComposerController {
 
 
@@ -18,22 +19,22 @@ public class ComposerController {
         this.composerRepository = composerRepository;
     }
 
-    @GetMapping("/composers")
+    @GetMapping
     public List<Composer> getComposers(){
         return composerRepository.findAll();
     }
 
-    @DeleteMapping("/composers/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteComposerById(@PathVariable Long id){
         composerRepository.deleteById(id);
     }
 
-    @PostMapping("/composers")
+    @PostMapping
     public void createComposer(@RequestBody Composer composer){
         composerRepository.save(composer);
     }
 
-    @PutMapping("/composers/{id}")
+    @PutMapping("/{id}")
     @Transactional
     public void updateComposer(@PathVariable Long id,
                                @RequestParam(required = false) String firstName,
