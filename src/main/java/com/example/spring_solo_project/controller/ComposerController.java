@@ -39,7 +39,8 @@ public class ComposerController {
                                @RequestParam(required = false) String firstName,
                                @RequestParam(required = false) String lastName,
                                @RequestParam(required = false) Date dob){
-        Composer composer = composerRepository.findById(id).orElseThrow();
+        Composer composer = composerRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Composer with ID " + id + " does not exist"));
         if(firstName != null){
             composer.setFirstName(firstName);
         }
