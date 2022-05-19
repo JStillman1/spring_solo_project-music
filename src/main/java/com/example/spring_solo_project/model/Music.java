@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.spring_solo_project.model;
 
 import javax.persistence.*;
 
