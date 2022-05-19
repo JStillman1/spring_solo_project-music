@@ -28,6 +28,11 @@ public class ComposerController {
         composerRepository.deleteById(id);
     }
 
+    @PostMapping("/composers")
+    public void createComposer(@RequestBody Composer composer){
+        composerRepository.save(composer);
+    }
+
     @PutMapping("/composers/{id}")
     @Transactional
     public void updateComposer(@PathVariable Long id,
