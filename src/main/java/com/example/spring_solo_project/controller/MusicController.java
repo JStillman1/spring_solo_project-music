@@ -16,7 +16,13 @@ public class MusicController {
     }
 
     @GetMapping("/music")
-    public List<Music> getMusic(){
+    public List<Music> getMusic( @RequestParam(required = false, name = "year") Integer year){
+
+        //  /music?year=2000
+        if(year != null){
+            return musicRepository.findAllComposedAfterYear(year);
+        }
+        // /music
         return musicRepository.findAll();
     }
 
@@ -35,9 +41,9 @@ public class MusicController {
         musicRepository.deleteById(id);
     }
 
-    @GetMapping("/music/filter/{year}")
-    public List<Music> findMusicComposedAfterYear(@PathVariable int year){
-        return musicRepository.findAllComposedAfterYear(year);
-    }
+//    @GetMapping("/music/filter/{year}")
+//    public List<Music> findMusicComposedAfterYear(@PathVariable int year){
+//        return musicRepository.findAllComposedAfterYear(year);
+//    }
 
 }
