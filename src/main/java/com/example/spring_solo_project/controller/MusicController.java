@@ -3,10 +3,7 @@ package com.example.spring_solo_project.controller;
 import com.example.spring_solo_project.model.Music;
 import com.example.spring_solo_project.repository.MusicRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,9 +25,19 @@ public class MusicController {
         return musicRepository.findByTitle(title);
     }
 
+    @PostMapping("/music")
+    public void createMusic(@RequestBody Music music){
+        musicRepository.save(music);
+    }
+
     @DeleteMapping("/music/delete/{id}")
     public void deleteMusicById(@PathVariable Long id){
         musicRepository.deleteById(id);
+    }
+
+    @GetMapping("/music/filter/{year}")
+    public List<Music> findMusicComposedAfterYear(@PathVariable int year){
+        return musicRepository.findAllComposedAfterYear(year);
     }
 
 }
