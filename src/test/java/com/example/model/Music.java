@@ -1,14 +1,21 @@
 package com.example.model;
 
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Music {
     //Properties
 
-
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String title;
     private int yearOfComposition;
     private String style;
 
+    @ManyToOne
     private Composer composer;
 
     //Constructors

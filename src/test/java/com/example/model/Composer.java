@@ -1,25 +1,30 @@
 package com.example.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Composer {
 
     //Properties
 
-
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     private String firstName;
     private String lastName;
     private Date dob;
+    @OneToMany(mappedBy = "composer", cascade = ALL)
     private List<Music> compositions;
 
 
     //Constructors
-
-
     public Composer() {
     }
 
