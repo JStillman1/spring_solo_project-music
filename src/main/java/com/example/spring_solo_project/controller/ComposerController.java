@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/composers")
+@RequestMapping("/composer")
 public class ComposerController {
 
 
@@ -20,9 +20,16 @@ public class ComposerController {
     }
 
     @GetMapping
-    public List<Composer> getComposers(){
+    public List<Composer> getComposers(@RequestParam(required = false, name = "id") Long id){
+        if(id != null){
+            return List.of(composerRepository.findById(id)
+                    .orElseThrow(() -> new IllegalStateException(
+                            "Composer Id does not exist"
+                    )));
+        }
         return composerRepository.findAll();
     }
+
 
     @DeleteMapping("/delete/{id}")
     public void deleteComposerById(@PathVariable Long id){
