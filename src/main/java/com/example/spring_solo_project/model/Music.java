@@ -1,5 +1,7 @@
 package com.example.spring_solo_project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -16,6 +18,7 @@ public class Music {
     private String style;
 
     @ManyToOne
+    @JsonIgnoreProperties
     private Composer composer;
 
     //Constructors

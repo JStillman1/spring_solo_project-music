@@ -1,6 +1,8 @@
 package com.example.spring_solo_project.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class Composer {
     private String lastName;
     private Date dob;
     @OneToMany(mappedBy = "composer", cascade = ALL)
+    @JsonIgnoreProperties({"composer"})
     private List<Music> compositions;
 
 
